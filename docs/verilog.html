@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array - Verilog Specification</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="types.html">FPGA Families</a></li>
+          <li><a href="history.html">Evolutionary History</a></li>
+          <li>
+            <a href="hdl.html" class="active">Hardware Descriptive Languages</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>Verilog Language Specification</h1>
+
+        <p>
+          Introduced in 1984 by Gateway Design Automation, Verilog was developed
+          to make digital logic simulation cleaner and faster. Because its
+          syntax shares structural similarities with the
+          <strong>C programming language</strong>, software developers often
+          find it more approachable than other engineering syntaxes.
+        </p>
+
+        <p>
+          Verilog operates on a module-based structure. Everything is defined
+          within a <code>module</code>/<code>endmodule</code> block, inside
+          which inputs, outputs, structural wires, and registers are defined
+          explicitly.
+        </p>
+
+        <h2>Example Project: 4-Bit Binary Up-Counter</h2>
+        <p>
+          The code block below demonstrates a fully operational, asynchronous
+          4-bit register counter. This circuit checks for the rising edge of a
+          system clock pulse and increments an unsigned integer tracking value
+          accordingly:
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+// Verilog implementation for an asynchronous-reset up-counter
+module counter(
+    input clk,
+    input rst,
+    output [3:0] q
+    );
+     
+    // counter register
+    reg [3:0] rCounter;
+     
+    // increment or reset counter
+    always @(posedge clk, posedge rst)
+        if (rst)
+            rCounter <= 0;
+        else
+            rCounter <= rCounter + 1;
+ 
+    // connect counter register to output wires
+    assign q = rCounter;
+endmodule
+</pre>
+        </div>
+
+        <h2>Execution Architecture</h2>
+        <p>
+          Inside the silicon block, the synthesis engine parses the
+          <code>always @(posedge clk)</code> block to realize that a physical
+          latching mechanism is needed. Rather than executing lines of
+          calculation sequentially, the physical circuit scales or clears its
+          outputs simultaneously on the absolute edge of the clock signal line
+          transition.
+        </p>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">HDL Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="hdl.html">&larr; Return to Core HDL</a></li>
+          <li><a href="vhdl.html">Switch to VHDL</a></li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>

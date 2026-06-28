@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array - VHDL Specification</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="types.html">FPGA Families</a></li>
+          <li><a href="history.html">Evolutionary History</a></li>
+          <li>
+            <a href="hdl.html" class="active">Hardware Descriptive Languages</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>VHDL Language Specification</h1>
+
+        <p>
+          Commissioned by the United States Department of Defense in 1983, VHDL
+          stands for <strong>VHSIC Hardware Description Language</strong> (where
+          VHSIC stands for Very High Speed Integrated Circuit). It was initially
+          created as a formal documentation language to describe how custom
+          microchips behaved on military weapon platforms.
+        </p>
+
+        <p>
+          VHDL requires strict isolation between the structural interface of a
+          block and its actual internal working mechanisms. Every design unit
+          must include an explicit <code>entity</code> block defining
+          input/output configurations, followed by an
+          <code>architecture</code> layout definition describing internal data
+          operations.
+        </p>
+
+        <h2>Example Project: 4-Bit Binary Up-Counter</h2>
+        <p>
+          The code block below outlines the exact same 4-bit synchronisation
+          counter task implemented with formal VHDL formatting:
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+-- VHDL implementation for an asynchronous-reset up-counter
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+entity vhdl_binary_counter is
+port(C, CLR : in std_logic;
+Q : out std_logic_vector(3 downto 0));
+end vhdl_binary_counter;
+architecture bhv of vhdl_binary_counter is
+signal tmp: std_logic_vector(3 downto 0);
+begin
+process (C, CLR)
+begin
+if (CLR=’1′) then
+tmp <= "0000";
+elsif (C’event and C=’1′) then
+tmp <= tmp + 1;
+end if;
+end process;
+Q <= tmp;
+end bhv;
+</pre>
+        </div>
+
+        <h2>Execution Architecture</h2>
+        <p>
+          While the syntax is considerably more verbose than the Verilog model,
+          the strong compilation system rules out data mismatch errors before
+          you even attempt to upload the bitstream file onto the physical
+          silicon chip. Once synthesised, both files yield identical physical
+          layout gates inside the array logic cells.
+        </p>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">HDL Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="hdl.html">&larr; Return to Core HDL</a></li>
+          <li><a href="verilog.html">Switch to Verilog</a></li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Homepage</a></li>
+          <li><a href="types.html">FPGA Families</a></li>
+          <li><a href="history.html">Evolutionary History</a></li>
+          <li><a href="hdl.html">Hardware Descriptive Languages</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>Introduction</h1>
+
+        <p>
+          A <strong>Field-Programmable Gate Array (FPGA)</strong> is an
+          integrated circuit — a silicon microchip — that can be configured by
+          an engineer after it has been manufactured. Unlike the processor in
+          your desktop or mobile phone, which has permanent internal circuitry,
+          an FPGA leaves the factory as a blank slate of individual logic
+          components. By using specialised code, a developer can physically
+          define how these components connect, effectively building a custom
+          hardware circuit tailored to a specific task.
+        </p>
+
+        <p>
+          To understand why this is unique, consider traditional computing.
+          Microprocessors (like CPUs) process software applications by fetching
+          instructions one after another and running them through static
+          internal components. An FPGA behaves entirely differently. It does not
+          run lines of software instructions sequentially; rather, it uses its
+          physical hardware fabric to process data simultaneously across
+          multiple custom pathways. When one configures an FPGA, they are using
+          code to construct physical hardware architecture rather than writing a
+          traditional software program.
+        </p>
+
+        <div class="feature-box">
+          <h4>Key Difference</h4>
+          <p>
+            Traditional computing structures are bound by
+            <strong>temporal execution</strong> (processing data line-by-line
+            over ticks of a system clock). Contrarily, FPGAs operate via
+            <strong>spatial execution</strong> (processing multiple datasets at
+            the exact same time in distinct physical regions of the chip).
+          </p>
+        </div>
+
+        <h2 id="comparison">Structural Comparison</h2>
+        <p>
+          To understand where FPGAs fit within modern computer engineering, here
+          are the architectural characteristics below:
+        </p>
+
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Chip</th>
+              <th>CPU / Microprocessor</th>
+              <th>FPGA Matrix</th>
+              <th>ASIC (Custom Silicon)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Execution Type</strong></td>
+              <td>Sequential (software-driven)</td>
+              <td>Parallel (hardware-driven)</td>
+              <td>Parallel (hardware-driven)</td>
+            </tr>
+            <tr>
+              <td><strong>Flexibility</strong></td>
+              <td>Infinite via software updates</td>
+              <td>Reconfigurable in the field</td>
+              <td>None (fixed at factory)</td>
+            </tr>
+            <tr>
+              <td><strong>Development Cost</strong></td>
+              <td>Very low</td>
+              <td>Medium</td>
+              <td>Extremely high (millions of $)</td>
+            </tr>
+            <tr>
+              <td><strong>Unit Cost</strong></td>
+              <td>Low to medium</td>
+              <td>Medium to high</td>
+              <td>Extremely low (at industrial scale)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="composition">What are FPGAs Made Of?</h2>
+        <p>
+          At the silicon wafer level, an FPGA is arranged as a repeating grid of
+          internal building blocks connected by flexible routing pathways. These
+          blocks are managed through high-speed Static RAM (SRAM) memory cells.
+        </p>
+
+        <h3>1. Configurable Logic Blocks (CLBs)</h3>
+        <p>
+          The CLB is the foundational computing element of the chip, distributed
+          in columns across the silicon die. Each individual CLB is engineered
+          to execute arbitrary logical and mathematical formulas through a
+          mechanism known as a <strong>Look-Up Table (LUT)</strong>.
+        </p>
+
+        <p>
+          A LUT functions essentially like a high-speed RAM unit. When a
+          designer implements a custom logical equation (such as a 4-input
+          AND/OR structure), the system converts this logic into a truth-table
+          bit sequence. This sequence is loaded into the LUT's memory cells upon
+          device boot. When external inputs reach the address pins of the LUT,
+          it retrieves the matching output state instantly.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ clb routing diagram ]
+
+  inputs (a, b, c, d) 
+         │
+         ▼
+ ┌───────────────┐
+ │ look-up table │ ───► asynchronous combinatorial output
+ │    (lut-4)    │               │
+ └───────────────┘               ▼
+         │               ┌───────────────┐
+         └──────────────►│   flip-flop   │───► synchronous clocked output
+                         │  (register)   │
+                         └───────────────┘
+                                 ▲
+                                 │
+                            clk signal
+                </pre>
+        </div>
+
+        <p>
+          Directly coupled to the LUT output is a
+          <strong>Flip-Flop register</strong>. This element introduces
+          synchronous time controls, transforming unstable combinatorial
+          circuits into highly predictable, clock-aligned sequential networks.
+        </p>
+
+        <h3>2. Programmable Interconnect Matrix</h3>
+        <p>
+          Woven between rows and columns of CLBs are thousands of physical
+          horizontal and vertical wire traces. Where these grid tracks cross,
+          there are specialized programmable switch matrices. By loading a
+          configuration file, specific paths are joined or cut, creating
+          structural electrical highways across the die.
+        </p>
+
+        <h3>3. Input / Output Blocks (IOBs)</h3>
+        <p>
+          Arranged at the outermost borders of the die, IOBs serve as the
+          electrical interfaces to external hardware components. These pins are
+          highly flexible and can be structured to support a wide range of
+          standard voltage specifications (such as LVCMOS, LVDS, and TTL).
+        </p>
+
+        <h3>4. Heterogeneous Hard-Core Subsystems</h3>
+        <p>
+          Modern professional architectures place dedicated, hard-wired
+          components alongside the programmable fabric to boost execution speeds
+          and minimize power consumption:
+        </p>
+        <ul>
+          <li>
+            <strong>Block RAM (BRAM):</strong> High-density dual-port internal
+            memory blocks used to store system arrays and data queues without
+            exhausting flexible logic blocks.
+          </li>
+          <li>
+            <strong>DSP Slices:</strong> Built-in hardware multipliers and
+            accumulators tailored to calculate fast, complex signal processing
+            mathematics.
+          </li>
+          <li>
+            <strong>Clock Generation Modules (PLL/MMCM):</strong> Special
+            circuits that multiply, divide, and phase-shift system frequencies
+            to keep all execution paths perfectly timed.
+          </li>
+        </ul>
+
+        <h2 id="applications">Real-World Applications</h2>
+        <p>
+          FPGAs occupy a distinct operational niche between general-purpose
+          processors and custom ASICs. They excel in workloads characterised by
+          massive data streams that must be processed with predictable,
+          ultra-low latencies.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ targeted fields ]
+
+  High Throughput / Low Latency Deployments
+  ├── Telecommunications ──► 5G Baseband Filter Arrays & Beamforming
+  ├── Defense Systems    ──► Real-Time Phase-Array Radar Signal Processing
+  ├── Data Infrastructure──► AI Acceleration, Network Encryption Pipelines
+  └── Prototyping        ──► Full Emulation of ASICs Before Factory Tape-Out
+                </pre>
+        </div>
+
+        <p>Key industries relying on FPGA infrastructure include:</p>
+        <ul>
+          <li>
+            <strong>Aerospace & Avionics:</strong> Real-time sensory tracking
+            loops, flight control computers, and secure cryptographic data links
+            where predictable timing is mission-critical.
+          </li>
+          <li>
+            <strong>Telecommunications Infrastructure:</strong> Managing complex
+            signal beamforming equations within high-throughput cellular base
+            stations and optical network nodes.
+          </li>
+          <li>
+            <strong>Data Centre Acceleration:</strong> Operating adjacent to
+            server CPUs to offload deep learning inference models, live video
+            transcoding transformations, and complex database sorting routines.
+          </li>
+          <li>
+            <strong>ASIC Functional Emulation:</strong> Simulating unreleased
+            physical processor architectures on physical test setups to
+            completely run and debug low-level firmware before sending designs
+            to costly manufacturing lines.
+          </li>
+        </ul>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">Section Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="#comparison">Structural Comparison</a></li>
+          <li><a href="#composition">Silicon Composition</a></li>
+          <li><a href="#applications">Real-World Applications</a></li>
+        </ul>
+        <hr class="panel-divider" />
+        <h3>Quick Technical Index</h3>
+        <ul
+          style="
+            padding-left: 15px;
+            font-size: 12px;
+            color: #333333;
+            margin-bottom: 0;
+          "
+        >
+          <li>SRAM-based fabric</li>
+          <li>True parallel hardware execution</li>
+          <li>Zero NRE design costs</li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>

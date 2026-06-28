@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array - Evolutionary History</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="types.html">FPGA Families</a></li>
+          <li>
+            <a href="history.html" class="active">Evolutionary History</a>
+          </li>
+          <li><a href="hdl.html">Hardware Descriptive Languages</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>Evolutionary History</h1>
+
+        <p>
+          The journey toward modern programmable silicon spans over five decades
+          of engineering breakthroughs. Before the arrival of Field-Programmable
+          Gate Arrays, digital engineers were limited to either wiring thousands
+          of individual logic gates by hand on breadboards or spending immense
+          sums to fabricate permanent ASIC chips.
+        </p>
+
+        <p>
+          The evolution of this hardware paradigm shifted digital logic away
+          from physically static electronics into flexible, fluid
+          desktop-reconfigurable computer architectures.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+    [ TIMELINE ]
+
+    ┌──────────────────────────────────────────────┐
+    │  1985: SRAM FPGA (Xilinx)                    │
+    │  - Infinite configurations, volatile matrix  │
+    ├──────────────────────────────────────────────┤
+    │  1980s: EEPROM CPLD                          │
+    │  - Reprogrammable, predictable timing        │
+    ├──────────────────────────────────────────────┤
+    │  1970s: PROM / PAL / PLA                     │
+    │  - One-time programmable, fusible links      │
+    └──────────────────────────────────────────────┘
+                </pre>
+        </div>
+
+        <h2 id="early-logic">1. The Early Foundations (1970s)</h2>
+        <p>
+          The earliest ancestors of programmable hardware were
+          <strong>Programmable Logic Arrays (PLAs)</strong> and
+          <strong>Programmable Array Logic (PALs)</strong>. These early
+          components consisted of an uncommitted grid of simple AND/OR digital
+          gates built with tiny internal fuses.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ PAL ONE-TIME PROGRAMMABLE FUSE CORE ]
+
+  Input A ───┬───────────────[ X ]───────────────┐
+             │                                   ▼
+  Input B ───┼───────────────[ ]─────────────────┤ AND Gate ──► Product Term
+             │                                   ▲
+  Input C ───┴───────────────[ X ]───────────────┘
+  
+  Legend: [ X ] Intact Fuse (Connected)   [ ] Blown Fuse (Disconnected)
+                </pre>
+        </div>
+
+        <p>
+          An engineer would blow these fuses inside a specialised device
+          programmer to route inputs to outputs. While revolutionary for the
+          time, these chips were entirely non-reprogrammable; if one made a
+          mistake in their logic design, the chip had to be thrown into the bin.
+        </p>
+
+        <h2 id="cplds">2. Complex Programmable Logic Devices (1980s)</h2>
+        <p>
+          As microchips grew denser, engineers combined multiple PAL structures
+          onto a single piece of silicon, creating the
+          <strong>Complex Programmable Logic Device (CPLD)</strong>. These
+          introduced electrically erasable memory components, meaning chips
+          could finally be wiped and reprogrammed multiple times on the desktop.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ CPLD MACROCELL ARCHITECTURE ]
+
+   ┌───────────────┐       ┌─────────────────────────┐       ┌───────────────┐
+   │  Macrocell 1  │──────►│                         │◄──────│  Macrocell 3  │
+   └───────────────┘       │       Central PIO       │       └───────────────┘
+                           │  (Programmable I/O /    │
+   ┌───────────────┐       │   Routing Matrix)       │       ┌───────────────┐
+   │  Macrocell 2  │──────►│                         │◄──────│  Macrocell 4  │
+   └───────────────┘       └─────────────────────────┘       └───────────────┘
+                                        │
+                                        ▼
+                                Global I/O Pins
+                </pre>
+        </div>
+
+        <p>
+          CPLDs were characterised by a highly predictable timing model. Because
+          every logic loop ran through a central routing matrix, calculating
+          signal propagation delays was simple and exact.
+        </p>
+
+        <h2 id="first-fpga">3. The First True FPGA (1985)</h2>
+        <p>
+          In 1985, Xilinx co-founders Ross Freeman and Bernard Vonderschmitt
+          commercialised the very first true Field-Programmable Gate Array: the
+          <strong>XC2064</strong>. Instead of using massive fixed banks of
+          standard AND/OR gates, this microchip introduced a sea of flexible
+          Look-Up Tables (LUTs) bound together by thousands of dynamic routing
+          wires controlled by volatile SRAM bits.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ THE FPGA MATRICES ARCHITECTURE ]
+
+     Isolated CLB Block             Distributed Wiring Matrix Tracks
+    ┌─────────────────┐             ═════════════════════════════════
+    │  [LUT] ──► [FF] │◄───[Switch]─────────────────┐
+    └─────────────────┘      Box                    ▼
+                                            ═════════════════════════
+                                            Dynamic SRAM Routing Paths
+                </pre>
+        </div>
+
+        <p>
+          This was initially considered a highly radical bet. Many contemporary
+          engineers believed dedicating precious silicon real estate to volatile
+          memory cells purely to route wire paths was a waste of resources.
+          However, Freeman’s insight won out: as silicon density scales
+          exponentially, space becomes cheap, and flexibility becomes
+          everything.
+        </p>
+
+        <h2 id="soc-era">4. The System-on-Chip Era (Modern Era)</h2>
+        <p>
+          Modern FPGAs have expanded beyond mere programmable logic matrices.
+          The modern era is defined by the
+          <strong>System-on-Chip (SoC) FPGA</strong>, which houses hardwired
+          physical microprocessor architectures (such as multi-core ARM
+          application chips) alongside traditional flexible FPGA logic columns
+          on a single physical die.
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ SYSTEM-ON-CHIP (SoC) INTERCONNECT DIE BISECTION ]
+
+  ┌───────────────────────────────────┬───────────────────────────────────┐
+  │         HARD PROCESSOR CORES      │      PROGRAMMABLE LOGIC FABRIC    │
+  │                                   │                                   │
+  │    ┌───────────┐   ┌───────────┐  │  ┌───────────┐     ┌───────────┐  │
+  │    │  ARM Core │   │  ARM Core │  │  │    CLB    │     │    CLB    │  │
+  │    └───────────┘   └───────────┘  │  └───────────┘     └───────────┘  │
+  │                  │                │        ▲                 ▲        │
+  └──────────────────┼────────────────┴────────┼─────────────────┼────────┘
+                     ▼                         │                 │
+            AXI High-Speed System Bus ─────────┴─────────────────┘
+                </pre>
+        </div>
+
+        <p>
+          This allows the processor to handle sequential OS tasks (like running
+          Linux) while seamlessly offloading heavy mathematical operations
+          directly to the parallel hardware blocks sitting millimetres away.
+        </p>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">Section Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="#early-logic">Early Foundations</a></li>
+          <li><a href="#cplds">CPLDs Emergence</a></li>
+          <li><a href="#first-fpga">The First FPGA</a></li>
+          <li><a href="#soc-era">Modern SoC Era</a></li>
+        </ul>
+        <hr class="panel-divider" />
+        <h3>Quick Technical Index</h3>
+        <ul
+          style="
+            padding-left: 15px;
+            font-size: 12px;
+            color: #333333;
+            margin-bottom: 0;
+          "
+        >
+          <li>Fuse-link configuration arrays</li>
+          <li>Xilinx XC2064 breakthrough</li>
+          <li>Heterogeneous hard-silicon</li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>

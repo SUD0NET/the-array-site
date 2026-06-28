@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array - Hardware Descriptive Languages</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="types.html">FPGA Families</a></li>
+          <li><a href="history.html">Evolutionary History</a></li>
+          <li>
+            <a href="hdl.html" class="active">Hardware Descriptive Languages</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>Hardware Descriptive Languages (HDLs)</h1>
+
+        <p>
+          To configure the physical channels and logic blocks within an FPGA,
+          engineers do not use traditional software programming languages like
+          C++ or Python. Instead, they rely on
+          <strong>Hardware Description Languages (HDLs)</strong>. While software
+          languages tell a CPU a sequence of actions to take over time, an HDL
+          describes the literal structure and physical layout of electronic
+          circuits operating simultaneously in space.
+        </p>
+
+        <h2 id="pipeline">The Hardware Compilation Pipeline</h2>
+        <p>
+          Transforming text-based HDL code into functional hardware requires
+          specialised vendor Integrated Development Environments (IDEs), such as
+          <strong>Xilinx/AMD Vivado</strong> or
+          <strong>Intel Quartus Prime</strong>. This compilation toolchain
+          follows a rigid sequence of physical layout phases:
+        </p>
+
+        <h3>1. Synthesis & Netlist Generation</h3>
+        <p>
+          The compiler parses the text code and breaks down the behavioural
+          logic into generic digital components (such as logic gates,
+          multiplexers, and flip-flops). The output of this stage is a
+          <strong>Netlist</strong>—a text database detailing every required
+          logical component and the exact connections (nets) running between
+          them.
+        </p>
+
+        <h3>2. Implementation: Placement & Routing</h3>
+        <p>
+          The IDE translates the abstract netlist into the actual physical
+          geometry of the targeted silicon wafer:
+        </p>
+        <ul>
+          <li>
+            <strong>Placement:</strong> The software analyses the netlist and
+            assigns specific logic equations to real, physical Look-Up Tables
+            (LUTs) and Configurable Logic Blocks (CLBs) on the die.
+          </li>
+          <li>
+            <strong>Routing:</strong> The tool determines the optimal
+            configuration for the thousands of tiny switch matrices,
+            establishing physical wire highways across the chip to join those
+            blocks together without causing propagation signal delays.
+          </li>
+        </ul>
+
+        <div class="ascii-container">
+          <pre>
+[ Design Implementation Summary ]
+
+  ┌────────────────┐      ┌────────────────┐      ┌────────────────┐
+  │  HDL SOURCE    │ ───► │   SYNTHESIS    │ ───► │  GATE NETLIST  │
+  │ (Logic Design) │      │ (Logic Mapping)│      │(Component Map) │
+  └────────────────┘      └────────────────┘      └────────────────┘
+                                                          |
+                                                          ▼         
+  ┌────────────────┐      ┌────────────────┐      ┌────────────────┐
+  │   BITSTREAM    │ ◄─── │    ROUTING     │ ◄─── │   PLACEMENT    │
+  │ (.bit / .bin)  │      │(Physical Wires)│      │ (Silicon Sites)│
+  └────────────────┘      └────────────────┘      └────────────────┘
+                </pre>
+        </div>
+
+        <h2 id="bitstreams">What is a Bitstream?</h2>
+        <p>
+          The ultimate objective of the toolchain is to generate a
+          <strong>Bitstream</strong> (typically a <code>.bit</code> or
+          <code>.bin</code> file). A bitstream is a dense stream of binary data
+          that contains no processor instructions or software application data.
+          Instead, it is a direct configuration map for the FPGA's underlying
+          internal memory cells.
+        </p>
+
+        <p>
+          Each bit in the file corresponds to a specific configuration point on
+          the chip: turning a routing switch on or off, defining the truth-table
+          rows inside an individual LUT, or setting up the electrical standard
+          of an I/O pin. Loading a bitstream physically constructs the targeted
+          hardware architecture inside the chip.
+        </p>
+
+        <h2 id="programming">Hardware Deployment Methods</h2>
+        <p>
+          Because most standard FPGAs are based on volatile SRAM memory, they
+          lose their custom configuration whenever power is disconnected. To
+          boot up successfully, the chip must be programmed or loaded using one
+          of several industry hardware interfaces:
+        </p>
+
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Protocol</th>
+              <th>Operational Mechanism</th>
+              <th>Primary Deployment Scenario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>JTAG (Joint Test Action Group)</strong></td>
+              <td>
+                A 4-wire or 5-wire synchronous test bus that connects directly
+                from the developer's computer via a USB probe straight into the
+                FPGA's configuration registers.
+              </td>
+              <td>
+                Used extensively during desktop development, debugging, and
+                real-time hardware signal tracing. Memory configuration is lost
+                instantly on power down.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>SPI (Serial Peripheral Interface)</strong></td>
+              <td>
+                A common 4-wire synchronous serial communication interface. Upon
+                power-up, the FPGA acts as a master device and automatically
+                fetches its configuration file.
+              </td>
+              <td>
+                Used in production environments. The bitstream is written to a
+                permanent, non-volatile external flash memory chip sitting next
+                to the FPGA on the PCB.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>SWD (Serial Wire Debug)</strong></td>
+              <td>
+                A compact 2-wire alternative interface primarily optimised for
+                microcontrollers and specific ARM-based SoC architectures.
+              </td>
+              <td>
+                Utilised on hybrid heterogeneous chips where an embedded
+                processor core manages the boot and configuration state of the
+                adjacent logic fabric.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ascii-container">
+          <pre>
+[ HIGH-RELIABILITY DEPLOYMENT TOPOOLOGY (SPI MODE) ]
+
+ ┌────────────────────────┐                  ┌────────────────────────┐
+ │   External Non-Volatile│  SPI Bus Lines   │   Volatile FPGA Die    │
+ │     Flash Memory       │─────────────────►│ (SRAM Logic Framework) │
+ │  [Holds Bitstream Map] │                  │ [Loads Map at Boot-up] │
+ └────────────────────────┘                  └────────────────────────┘
+                </pre>
+        </div>
+
+        <h2 id="variants">The Core Languages</h2>
+        <p>
+          The global electronics community relies primarily on two major
+          historical standardisations of HDL design, each with entirely
+          contrasting syntax systems and engineering design philosophies:
+        </p>
+
+        <div class="feature-box">
+          <h4>
+            <a href="verilog.html" style="color: #cc0000; text-decoration: none"
+              >Verilog HDL &rarr;</a
+            >
+          </h4>
+          <p>
+            Based heavily on the style of the C programming language. Compact,
+            highly flexible, and allows for rapid structural modifications,
+            though its loose type-checking can introduce subtle physical bugs if
+            not carefully written.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <h4>
+            <a href="vhdl.html" style="color: #cc0000; text-decoration: none"
+              >VHDL &rarr;</a
+            >
+          </h4>
+          <p>
+            Derived directly from the Ada programming language. Incredibly
+            strict, strongly typed, and highly verbose. Its design ensures that
+            complex multi-million gate projects remain structurally sound and
+            verify perfectly before synthesis.
+          </p>
+        </div>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">Language Sub-files</h3>
+        <ul class="section-menu">
+          <li><a href="verilog.html">Verilog Reference</a></li>
+          <li><a href="vhdl.html">VHDL Reference</a></li>
+        </ul>
+        <hr class="panel-divider" />
+        <h3 style="margin-top: 0">Section Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="#pipeline">Compilation Pipeline</a></li>
+          <li><a href="#bitstreams">What is a Bitstream</a></li>
+          <li><a href="#programming">Deployment Methods</a></li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>

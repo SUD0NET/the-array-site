@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Array - FPGA Families</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="site-title">The <span>Array</span></div>
+        <div style="font-size: 16px; color: #666666">Class: 10CT1</div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="types.html" class="active">FPGA Families</a></li>
+          <li><a href="history.html">Evolutionary History</a></li>
+          <li><a href="hdl.html">Hardware Descriptive Languages</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <main>
+        <h1>FPGA Families & Modern Vendors</h1>
+
+        <p>
+          The field-programmable landscape is governed by a diverse ecosystem of
+          manufacturers, each catering to different performance tiers, power
+          envelopes, and industrial verticals. From multi-billion-gate AI
+          super-computing chips to sub-milliwatt miniature configurations
+          running inside smart devices, selecting the appropriate hardware
+          family depends heavily on both logic primitives and software IDE
+          constraints.
+        </p>
+
+        <h2 id="vendors">The Big Four: Corporate History & Evolution</h2>
+
+        <h3>1. AMD / Xilinx</h3>
+        <p>
+          Founded in 1984 by Ross Freeman and Bernard Vonderschmitt, Xilinx
+          invented the commercial FPGA. For decades, they pioneered
+          high-performance silicon architectures. In 2022, chip giant
+          <strong>AMD</strong> acquired Xilinx for <strong>$49 billion</strong>,
+          integrating Xilinx's programmable fabric into their data center server
+          line-ups to compete against specialized AI computing systems.
+        </p>
+
+        <h3>2. Altera (Intel Programmable Solutions Group)</h3>
+        <p>
+          Altera was formed in 1983 and stood as Xilinx's fierce rival for over
+          thirty years. Intel acquired Altera in 2015 for
+          <strong>$16.7 billion</strong> to pair logic matrices with their Xeon
+          processors. In a massive corporate turn-around, Intel spun Altera back
+          out as a standalone independent entity to allow them to focus
+          aggressively on core industrial market configurations.
+        </p>
+
+        <h3>3. Lattice Semiconductor</h3>
+        <p>
+          Established in 1983, Lattice survived the intense corporate wars
+          between Xilinx and Altera by completely pivoting away from massive,
+          power-hungry computing devices. Lattice focuses squarely on low-power,
+          ultra-compact, cost-efficient FPGAs. If a system needs to run on tiny
+          battery packs or control simple hardware routines inside small
+          consumer electronics, Lattice is the industry standard.
+        </p>
+
+        <h3>4. Cologne Chip AG</h3>
+        <p>
+          A smaller, independent European semiconductor firm based in Germany
+          with over 25 years of telecommunication design experience. Cologne
+          Chip made massive waves in the modern market by launching the
+          <strong>GateMate</strong> FPGA family. These chips offer a unique
+          alternative to the traditional American corporate giants, utilising
+          novel logic architecture tailored for mid-range, low-cost European
+          manufacturing projects.
+        </p>
+
+        <h2 id="lineups">Lineup Matrix & Pricing Comparison</h2>
+        <p>
+          Below is a balanced structural breakdown across comparable logic tiers
+          from each manufacturer, outlining estimated cost targets at low-volume
+          distributions:
+        </p>
+
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Vendor Tier</th>
+              <th>Low-Cost / High Efficiency</th>
+              <th>Mid-Range / Balanced</th>
+              <th>Ultra-High Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AMD / Xilinx</strong></td>
+              <td>
+                <strong>Spartan-7 / Artix-7</strong><br /><em
+                  >Price: $35 - $700</em
+                >
+              </td>
+              <td>
+                <strong>Kintex-7 / Artix UltraScale+</strong><br /><em
+                  >Price: $500 - $3000</em
+                >
+              </td>
+              <td>
+                <strong>Virtex UltraScale+ / Versal ACAP</strong><br /><em
+                  >Price: $3000 - $15000+</em
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Altera</strong></td>
+              <td>
+                <strong>Cyclone IV / Cyclone V</strong><br /><em
+                  >Price: $75 - $300</em
+                >
+              </td>
+              <td>
+                <strong>Arria 10 / Cyclone 10 GX</strong><br /><em
+                  >Price: $100+</em
+                >
+              </td>
+              <td>
+                <strong>Stratix 10 / Agilex 9 / 7</strong><br /><em
+                  >Price: $2000 - $20000+</em
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Lattice</strong></td>
+              <td>
+                <strong>iCE40 / MachXO3</strong><br /><em>Price: $12 - $25</em>
+              </td>
+              <td>
+                <strong>ECP5 / CrossLink-NX</strong><br /><em
+                  >Price: $35 - $100</em
+                >
+              </td>
+              <td>
+                <strong>Avant-E / Avant-G</strong><br /><em
+                  >Price: $150 - $600+</em
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Cologne Chip</strong></td>
+              <td>
+                <strong>GateMate CCGM1A1 (A1)</strong><br /><em
+                  >Price: $20 - $27</em
+                >
+              </td>
+              <td><em>N/A (Focused on high efficiency)</em></td>
+              <td><em>N/A (Focused on high efficiency)</em></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="ide">Software Toolchains & IDE Systems</h2>
+        <p>
+          An FPGA is only as good as the software toolchain that compiles its
+          code. Every company maintains its own suite of proprietary IDE
+          platforms:
+        </p>
+        <ul>
+          <li>
+            <strong>AMD Vivado ML Edition:</strong> A massive, highly advanced
+            IDE optimized for high-speed synthesis and layout mapping. It
+            features extensive analytical capabilities but requires immense
+            computer RAM and processing power to run placement loops.
+          </li>
+          <li>
+            <strong>Intel Quartus Prime:</strong> The flagship compilation
+            system for Altera chips. It contains highly modular design
+            separation controls, allowing parts of the silicon chip to keep
+            running while other sectors undergo live re-compilation.
+          </li>
+          <li>
+            <strong>Lattice Radiant / Diamond:</strong> Lightweight, fast
+            compilation platforms designed to parse small-to-medium logic
+            structures quickly without heavy software overhead.
+          </li>
+          <li>
+            <strong>Open-Source Toolchains (Yosys + nextpnr):</strong> A huge
+            community-driven shift in hardware engineering. While AMD and Intel
+            guard their chip details, components like Lattice iCE40/ECP5 and
+            Cologne Chip GateMate fully support completely free, community-built
+            compilers. This allows code to compile in seconds right inside
+            standard Linux command-line terminals.
+          </li>
+        </ul>
+
+        <h2 id="primitives">Architectural Primitives</h2>
+        <p>
+          While standard components rely on 4-input or 6-input Look-Up Tables
+          (LUT4 / LUT6) paired with standard Flip-Flops, Cologne Chip utilises a
+          unique block unit layout inside their GateMate silicon:
+        </p>
+
+        <div class="ascii-container">
+          <pre>
+[ TYPICAL HARDWARE PRIMITIVE DIFFERENCES ]
+
+  STANDARD AMD/INTEL CLB CELL            COLOGNE CHIP GATEMATE "CPE" CELL
+  ┌──────────────────────────────┐       ┌──────────────────────────────┐
+  │ ┌──────────────────────────┐ │       │ ┌──────────────┐┌──────────┐ │
+  │ │  6-Input LUT (LUT6)      │ │       │ │  8-Input tree││ 2x LUT4  │ │
+  │ └────────────┬─────────────┘ │       │ │  (CPE Block) ││  Engine  │ │
+  │              ▼               │       │ └──────┬───────┘└────┬─────┘ │
+  │ ┌──────────────────────────┐ │       │        └──────┬──────┘       │
+  │ │  Dedicated Flip-Flop     │ │       │               ▼              │
+  │ └──────────────────────────┘ │       │ ┌──────────────────────────┐ │
+  │                              │       │ │ 2x Multi-Mode Registers  │ │
+  |                              |       | └──────────────────────────┘ |
+  └──────────────────────────────┘       └──────────────────────────────┘
+                </pre>
+        </div>
+
+        <p>
+          Cologne Chip's <strong>CPE (Programmable Element)</strong> blocks can
+          be configured on-the-fly to act either as two independent 4-input
+          LUTs, a single 8-input tree logic gate, or a high-speed hardware
+          mathematical adder. This allows the layout matrix to achieve high
+          circuit packing density at a fraction of the power consumption of
+          classic computing platforms.
+        </p>
+      </main>
+
+      <aside class="scrolling-aside">
+        <h3 style="margin-top: 0">Section Navigation</h3>
+        <ul class="section-menu">
+          <li><a href="#vendors">Vendor Evolution</a></li>
+          <li><a href="#lineups">Series Lineups & Prices</a></li>
+          <li><a href="#ide">Software IDEs</a></li>
+          <li><a href="#primitives">Hardware Primitives</a></li>
+        </ul>
+
+        <hr class="panel-divider" />
+
+        <h3>Quick Technical Index</h3>
+        <p style="font-size: 12px; color: #444444">Ecosystem metrics:</p>
+        <ul
+          style="
+            padding-left: 15px;
+            font-size: 12px;
+            color: #333333;
+            margin-bottom: 0;
+          "
+        >
+          <li>AMD High-End Compute Scaling</li>
+          <li>Altera Modular Reconfigurations</li>
+          <li>Lattice Low-Power Targets</li>
+          <li>GateMate Open-Source Tooling</li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; 2026 Adnan Saad & Wilkie Taylor-Newling</p>
+    </footer>
+  </body>
+</html>
