@@ -224,3 +224,29 @@ footer {
   color: #666666;
   text-align: center;
 }
+
+/* mobile stuff */
+@media (max-width: 768px) {
+  .scrolling-aside {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    transform: none !important;
+    transition: none !important;
+  }
+  .section-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 0;
+  }
+
+  .section-menu li {
+    margin-bottom: 0;
+  }
+  .scrolling-aside h3,
+  .panel-divider,
+  .scrolling-aside ul:not(.section-menu) {
+    display: none !important;
+  }
+}
